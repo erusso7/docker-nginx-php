@@ -1,0 +1,27 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile
+    ports:
+      - 81:80
+    networks:
+      - default
+    depends_on:
+      - php
+    volumes:
+      - ./app:/var/www
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    networks:
+      - default
+    volumes:
+      - ./app:/var/www
+
+networks:
+  default:
+
